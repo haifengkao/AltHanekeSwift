@@ -33,7 +33,7 @@ extension HanekeGlobals {
     
 }
 
-public class Cache<T: DataConvertible where T.Result == T, T : DataRepresentable>:HanekeCache<T, DiskCache, NSCache>{
+public class Cache<T: DataConvertible where T.Result == T, T : DataRepresentable>: HanekeCache<T, DiskCache, NSCache>{
 
     public override init(name: String) {
         super.init(name: name)
