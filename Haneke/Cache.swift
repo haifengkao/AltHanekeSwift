@@ -83,7 +83,7 @@ public class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT where T.Re
     }
     
     public func fetch(key key: String, formatName: String = HanekeGlobals.Cache.OriginalFormatName, failure fail : Fetch<T>.Failer? = nil, success succeed : Fetch<T>.Succeeder? = nil) -> Fetch<T> {
-        let fetch = Cache.buildFetch(failure: fail, success: succeed)
+        let fetch = HanekeCache.buildFetch(failure: fail, success: succeed)
         if let (format, memoryCache, diskCache) = self.formats[formatName] {
             if let wrapper = memoryCache.objectForKey(key) as? ObjectWrapper, let result = wrapper.value as? T {
                 fetch.succeed(result)
@@ -108,7 +108,7 @@ public class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT where T.Re
     
     public func fetch(fetcher fetcher : Fetcher<T>, formatName: String = HanekeGlobals.Cache.OriginalFormatName, failure fail : Fetch<T>.Failer? = nil, success succeed : Fetch<T>.Succeeder? = nil) -> Fetch<T> {
         let key = fetcher.key
-        let fetch = Cache.buildFetch(failure: fail, success: succeed)
+        let fetch = HanekeCache.buildFetch(failure: fail, success: succeed)
         self.fetch(key: key, formatName: formatName, failure: { error in
             if error?.code == HanekeGlobals.Cache.ErrorCode.FormatNotFound.rawValue {
                 fetch.fail(error)
