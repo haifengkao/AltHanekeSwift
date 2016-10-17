@@ -1,15 +1,13 @@
-# references:
-# * http://www.objc.io/issue-6/travis-ci.html
-# * https://github.com/supermarin/xcpretty#usage
-
 language: objective-c
+osx_image: xcode8
 before_install:
-  #- brew update
-  #- "brew uninstall xctool; brew install xctool --HEAD;"
-  - gem i cocoapods --no-ri --no-rdoc
-  - "gem install slather --no-rdoc --no-ri --no-document --quiet"
-#xcode_workspace: Example/AltHanekeSwift.xcworkspace
-#xcode_scheme: AltHanekeSwift-Example
-#xcode_sdk: iphonesimulator
-script: xctool test -workspace Example/AltHanekeSwift.xcworkspace -scheme AltHanekeSwift-Example -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
-after_success: slather
+- brew update
+- brew install carthage || brew outdated carthage || brew upgrade carthage
+install:
+- carthage bootstrap
+branches:
+  only:
+    - master
+    - feature/swift-3
+script:
+  - set -o pipefail && xcodebuild -workspace Haneke.xcworkspace -scheme Haneke-iOS -sdk iphonesimulator10.0 build test | xcpretty --color
