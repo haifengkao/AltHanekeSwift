@@ -184,7 +184,7 @@ open class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT where T.Resu
     
     // MARK: Formats
 
-    var formats : [String : (Format<T>, NSCache<AnyObject, AnyObject>, DiskCache)] = [:]
+    public var formats : [String : (Format<T>, NSCache<AnyObject, AnyObject>, DiskCache)] = [:]
     
     open func addFormat(_ format : Format<T>) {
         let name = format.name
