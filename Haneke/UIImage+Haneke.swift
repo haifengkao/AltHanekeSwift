@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIImage {
+public extension UIImage {
 
     func hnk_imageByScaling(toSize size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, !hnk_hasAlpha(), 0.0)
