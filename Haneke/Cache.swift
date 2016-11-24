@@ -33,14 +33,14 @@ extension HanekeGlobals {
     
 }
 
-open class Cache<T: DataConvertible where T.Result == T, T : DataRepresentable>: HanekeCache<T, DiskCache, NSCache>{
+open class Cache<T: DataConvertible>: HanekeCache<T, DiskCache, NSCache<AnyObject, AnyObject>> where T.Result == T, T : DataRepresentable{
 
     public override init(name: String) {
         super.init(name: name)
     }
 }
 
-open class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT where T.Result == T, T : DataRepresentable, DiskCacheT: DiskCache, MemoryCacheT: NSCache> {
+open class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT> where T.Result == T, T : DataRepresentable, DiskCacheT: DiskCache, MemoryCacheT: NSCache<AnyObject, AnyObject> {
     
     let name: String
     
