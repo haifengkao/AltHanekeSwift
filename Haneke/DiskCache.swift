@@ -122,13 +122,8 @@ open class DiskCache {
     }
 
     open func path(forKey key: String) -> String {
-        //let escapedFilename = key.escapedFilename()
-        //let filename = escapedFilename.characters.count < Int(NAME_MAX) ? escapedFilename : key.MD5Filename()
-        
-        // HF: don't use escapedFilename, use MD5 only
-        // let escapedFilename = key.escapedFilename()
-        // let filename = escapedFilename.characters.count < Int(NAME_MAX) ? escapedFilename : key.MD5Filename()
-        let filename = key.MD5Filename()
+        let escapedFilename = key.escapedFilename()
+        let filename = escapedFilename.characters.count < Int(NAME_MAX) ? escapedFilename : key.MD5Filename()
         let keyPath = (self.path as NSString).appendingPathComponent(filename)
         return keyPath
     }
