@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'AltHanekeSwift'
   s.module_name = 'AltHaneke'
-  s.version = '0.13.0'
+  s.version = '0.14.0'
   s.license = 'Apache'
   s.summary = 'an alternative HanekeSwift which provides flexibility.'
   s.homepage = 'https://github.com/haifengkao/AltHanekeSwift'
