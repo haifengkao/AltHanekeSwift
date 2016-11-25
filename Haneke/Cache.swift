@@ -184,20 +184,20 @@ open class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT> where T.Res
     
     // MARK: Formats
 
-    public var formats : [String : (Format<T>, NSCache<AnyObject, AnyObject>, DiskCache)] = [:]
+    public var formats : [String : (Format<T>, MemoryCacheT, DiskCacheT)] = [:]
     
     open func addFormat(_ format : Format<T>) {
         let name = format.name
         let formatPath = self.formatPath(withFormatName: name)
-        let memoryCache = NSCache<AnyObject, AnyObject>()
-        let diskCache = DiskCache(path: formatPath, capacity : format.diskCapacity)
+        let memoryCache = MemoryCacheT()
+        let diskCache = DiskCacheT(path: formatPath, capacity : format.diskCapacity)
         self.formats[name] = (format, memoryCache, diskCache)
     }
     
     // MARK: Internal
     
     lazy var cachePath: String = {
-        let basePath = DiskCache.basePath()
+        let basePath = DiskCacheT.basePath()
         let cachePath = (basePath as NSString).appendingPathComponent(self.name)
         return cachePath
     }()
@@ -221,7 +221,7 @@ open class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT> where T.Res
         return value.asData()
     }
     
-    fileprivate func fetchFromDiskCache(_ diskCache : DiskCache, key: String, memoryCache : NSCache<AnyObject, AnyObject>, failure fail : ((Error?) -> ())?, success succeed : @escaping (T) -> ()) {
+    fileprivate func fetchFromDiskCache(_ diskCache : DiskCacheT, key: String, memoryCache : MemoryCacheT, failure fail : ((Error?) -> ())?, success succeed : @escaping (T) -> ()) {
         diskCache.fetchData(key: key, failure: { error in
             if let block = fail {
                 if (error as? NSError)?.code == NSFileReadNoSuchFileError {
