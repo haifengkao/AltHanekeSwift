@@ -110,7 +110,7 @@ open class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT> where T.Res
         let key = fetcher.key
         let fetch = HanekeCache.buildFetch(failure: fail, success: succeed)
         self.fetch(key: key, formatName: formatName, failure: { error in
-            if (error as? NSError)?.code == HanekeGlobals.Cache.ErrorCode.formatNotFound.rawValue {
+            if (error as NSError?)?.code == HanekeGlobals.Cache.ErrorCode.formatNotFound.rawValue {
                 fetch.fail(error)
             }
             
@@ -224,7 +224,7 @@ open class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT> where T.Res
     fileprivate func fetchFromDiskCache(_ diskCache : DiskCacheT, key: String, memoryCache : MemoryCacheT, failure fail : ((Error?) -> ())?, success succeed : @escaping (T) -> ()) {
         diskCache.fetchData(key: key, failure: { error in
             if let block = fail {
-                if (error as? NSError)?.code == NSFileReadNoSuchFileError {
+                if (error as NSError?)?.code == NSFileReadNoSuchFileError {
                     let localizedFormat = NSLocalizedString("Object not found for key %@", comment: "Error description")
                     let description = String(format:localizedFormat, key)
                     let error = errorWithCode(HanekeGlobals.Cache.ErrorCode.objectNotFound.rawValue, description: description)

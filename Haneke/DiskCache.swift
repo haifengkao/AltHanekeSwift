@@ -55,7 +55,7 @@ open class DiskCache {
         })
     }
     
-    @discardableResult open func fetchData(key: String, failure fail: ((Error?) -> ())? = nil, success succeed: @escaping (Data) -> ()) {
+    open func fetchData(key: String, failure fail: ((Error?) -> ())? = nil, success succeed: @escaping (Data) -> ()) {
         cacheQueue.async {
             let path = self.path(forKey: key)
             do {
@@ -123,7 +123,7 @@ open class DiskCache {
 
     open func path(forKey key: String) -> String {
         let escapedFilename = key.escapedFilename()
-        let filename = escapedFilename.characters.count < Int(NAME_MAX) ? escapedFilename : key.MD5Filename()
+        let filename = escapedFilename.count < Int(NAME_MAX) ? escapedFilename : key.MD5Filename()
         let keyPath = (self.path as NSString).appendingPathComponent(filename)
         return keyPath
     }
