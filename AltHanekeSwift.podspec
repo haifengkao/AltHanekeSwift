@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '9.1'
   s.ios.deployment_target = '8.0'
   s.source_files = 'Haneke/*.swift'
+  s.swift_version = '4.2'
 end
