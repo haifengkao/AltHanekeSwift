@@ -34,7 +34,7 @@ public extension UIImage {
         return data
     }
     
-    func hnk_decompressedImage() -> UIImage! {
+    @objc func hnk_decompressedImage() -> UIImage! {
         let originalImageRef = self.cgImage
         let originalBitmapInfo = originalImageRef?.bitmapInfo
         guard let alphaInfo = originalImageRef?.alphaInfo else { return UIImage() }
