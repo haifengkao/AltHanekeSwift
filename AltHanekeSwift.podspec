@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'AltHanekeSwift'
   s.module_name = 'AltHaneke'
-  s.version = '0.20.0'
+  s.version = '0.21.0'
   s.license = 'Apache'
   s.summary = 'an alternative HanekeSwift which provides flexibility.'
   s.homepage = 'https://github.com/haifengkao/AltHanekeSwift'
@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   #s.tvos.deployment_target = '9.1'
   s.ios.deployment_target = '8.0'
   s.source_files = 'Haneke/*.swift'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 end
