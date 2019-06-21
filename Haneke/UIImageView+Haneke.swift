@@ -86,7 +86,9 @@ public extension UIImageView {
             return .AspectFill
         case .redraw, .center, .top, .bottom, .left, .right, .topLeft, .topRight, .bottomLeft, .bottomRight:
             return .None
-            }
+        @unknown default:
+            fatalError()
+        }
     }
 
     func hnk_fetchImageForFetcher(_ fetcher : Fetcher<UIImage>, format : Format<UIImage>? = nil, failure fail : ((Error?) -> ())?, success succeed : ((UIImage) -> ())?) -> Bool {

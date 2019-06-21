@@ -65,7 +65,7 @@ open class HanekeCache<T: DataConvertible, DiskCacheT, MemoryCacheT> where T.Res
     
     deinit {
         let notifications = NotificationCenter.default
-        notifications.removeObserver(memoryWarningObserver, name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+        notifications.removeObserver(memoryWarningObserver as Any, name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
     }
     
     open func set(value: T, key: String, formatName: String = HanekeGlobals.Cache.OriginalFormatName, success succeed: ((T) -> ())? = nil) {
